@@ -5,8 +5,8 @@ Netlify Deploy Link:
 
 
 ### Technologies used
-1. SASS
-2. React
+1. React
+2. Sass
 3. Mongoose
 4. MongoDB
 5. express
@@ -33,9 +33,9 @@ Netlify Deploy Link:
 4. Job Index
 
 ## Routes
-1. The header will include "/" - index of applied jobs and job wishlist, also includes form to add new jobs to index
+1. The header will include "/" - route to main home page and index of applied jobs and job wishlist, also includes form to add new jobs to index
 2. Each item in the index will include "/jobs/:id" - show page for each job
-3. The show page will include routes to update or delete jobs
+3. The show page will include routes to update or delete jobs - PUT and DELETE 
 4. The form in the main page will include a POST route to add new jobs to the index of applied jobs.
 
 
