@@ -2,6 +2,8 @@
 
 https://files.slack.com/files-pri/T0351JZQ0-F02MNV5HPAQ/jobpug_logo_white_background_.png
 
+![JobPug logo](https://files.slack.com/files-pri/T0351JZQ0-F02MNV5HPAQ/jobpug_logo_white_background_.png "JobPug")
+
 Netlify Deploy Link:
 
 
