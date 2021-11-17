@@ -1,4 +1,4 @@
-# Project 3 Backend - JobPug - JobPug is here to help you keep track of jobs you've applied and would like to apply to
+# Project 3 Frontend - JobPug - JobPug is here to help you keep track of jobs you've applied to and would like to apply to
 
 ![jobpug_logo_white_background_](https://user-images.githubusercontent.com/86563943/142106390-fb661b10-33c5-4312-b81e-dabb987ee9e6.png)
 
