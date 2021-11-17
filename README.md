@@ -1,6 +1,6 @@
 # Project 3 Backend - JobPug - JobPug is here to help you keep track of jobs you've applied and would like to apply to
 
-![JobPug logo](jobpug_logo_white_background_.png "JobPug")
+![jobpug_logo_white_background_](https://user-images.githubusercontent.com/86563943/142106390-fb661b10-33c5-4312-b81e-dabb987ee9e6.png)
 
 
 Netlify Deploy Link:
