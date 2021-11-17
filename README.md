@@ -1,4 +1,6 @@
-# Project 3 Frontend - JobPug - JobPug is here to help you keep track of your Job Applications
+# Project 3 Backend - JobPug - JobPug is here to help you keep track of jobs you've applied and would like to apply to
+
+https://files.slack.com/files-pri/T0351JZQ0-F02MNV5HPAQ/jobpug_logo_white_background_.png
 
 Netlify Deploy Link:
 
