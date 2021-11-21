@@ -1,0 +1,24 @@
+nav{
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid gray;
+    padding: 4px;
+}
+
+.App > a > h1{
+    text-align: center;
+    text-decoration: none;
+}
+
+.App > a{
+    text-decoration: none;
+    color: black;
+}
+
+input[type="text"], input[type="password"], input[type="submit"]{
+    padding: 5px;
+    margin: 8px;
+    background-color: salmon;
+    color: white;
+    border: none;
+}
