@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+      
+
+        //signup
+        // fetch("http://localhost:3000/auth/signup", {
+        //     method: "post",
+        //     headers: {
+        //         "Content-type": "application/json"
+        //     },
+        //     body: JSON.stringify({username: "dan11", password: "dan"})
+        // })
+        // .then(response => response.json())
+        // .then(data => console.log(data))
+
+        //login
+        // fetch("http://localhost:3000/auth/login", {
+        //     method: "post",
+        //     headers: {
+        //         "Content-type": "application/json"
+        //     },
+        //     body: JSON.stringify({username: "dan11", password: "dan"})
+        // })
+        // .then(response => response.json())
+        // .then(data => console.log(data))
+
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhbjExIiwiaWF0IjoxNjM3NDM3NjE1fQ.KBK4579tWXSFx-xKVgepeEgxqNEBvjBaw8l2ZetlRBg"
+
+//create
+        fetch("http://localhost:3000/job/", {
+            method: "post",
+            headers: {
+                "Content-type": "application/json",
+                Authorization: `bearer ${token}`
+            },
+            body: JSON.stringify({
+                title: "Front-End Engineer",
+                company: "Tesla",
+                url: "www.tesla.com",
+                date: "11/20/2021",
+                location: "NY",
+                status: true
+
+        
+        })
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+
+
+
+
+    </script> 
+</body>
+</html>
