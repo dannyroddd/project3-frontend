@@ -1,0 +1,53 @@
+import { useState } from "react";
+
+function Show(props) {
+    const id = props.match.params.id
+    const job = props.jobs.find((singleJob) => {
+        return singleJob._id === id
+    })
+
+    // state for form
+    const [editForm, setEditForm] = useState(job)
+
+    const handleChange = (event) => {
+        setEditForm({...editForm, [event.target.name]: event.target.value})
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        props.updateJob(editForm, job._id)
+        props.history.push("/")
+    }
+
+    const removeJob = () => {
+        props.deleteJob(job._id)
+        props.history.push("/")
+    }
+
+    return (
+        <div>
+            <h1>{job.title}</h1>
+            <h1>{job.company}</h1>
+            <h1>{job.location}</h1>
+            <h1>{job.status}</h1>
+            <h3><a href={job.url}>{job.url}</a></h3>
+            <form onSubmit={handleSubmit}>
+                <input type="text" name="title" placeholder="title" value={editForm.title} onChange={handleChange} />
+
+                <input type="text" name="company" placeholder="company" value={editForm.company} onChange={handleChange} />
+
+                <input type="text" name="location" placeholder="location" value={editForm.location} onChange={handleChange} />
+
+                <input type="text" name="status" placeholder="status" value={editForm.status} onChange={handleChange} />
+
+                <input type="text" name="url" placeholder="url" value={editForm.url} onChange={handleChange} />
+
+                <input type="submit" value="Update Job" />
+
+            </form>
+            <button onClick={removeJob} id="delete">DELETE</button>
+        </div>
+    )
+}
+
+export default Show;
