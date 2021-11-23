@@ -3,9 +3,11 @@ import { useState , useEffect} from "react"
 import Header from './components/Header';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Home from './pages/Home';
 import { Route, Link, Switch } from 'react-router-dom';
 import './App.css';
 import logo from "./images/jobpuglogo.png" 
+
 
 export const GlobalCtx = React.createContext(null)
 
@@ -27,10 +29,10 @@ function App() {
     <GlobalCtx.Provider value={{gState, setGState}}>
     <div className="App">
       <Link to="/"><h1><img className="logo" src={logo}></img></h1></Link>
-      <Header/>
+      <Header />
       <main>
         <Switch>
-          <Route exact path="/" render={(rp) => gState.token ? <h1>Main App</h1> : <h1>Home</h1>}/>
+          <Route exact path="/" render={(rp) => gState.token ? <h1>Main App</h1> : <Home />}/>
           <Route path="/signup" render={(rp) => <Signup {...rp}/>}/>
           <Route path="/login" render={(rp) => <Login {...rp}/>}/>
           <Route path="/dashboard" render={(rp) => <h1>Main App</h1>}/>
