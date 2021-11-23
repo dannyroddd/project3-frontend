@@ -38,13 +38,26 @@ function Show(props) {
 
                 <input type="text" name="location" placeholder="location" value={editForm.location} onChange={handleChange} />
 
-                <input type="text" name="status" placeholder="status" value={editForm.status} onChange={handleChange} />
-
                 <input type="text" name="url" placeholder="url" value={editForm.url} onChange={handleChange} />
 
-                <input type="submit" value="Update Job" />
+                {/* <input type="text" name="status" placeholder="status" value={editForm.status} onChange={handleChange} />
+                <input type="submit" value="Update Job" /> */}
+                <select id = "status-select" value={editForm.status} name="status"
+        //   placeholder="Status" 
+        >
+                <option value="">--Please choose an option--</option>
+                <option value="applied">Applied</option>
+                <option value="In Process">In Process</option>
+                <option value="Offer Extended/Rejected">Offer Extended/Rejected</option>
+                 <option value="Offer Extended/Accepted">Offer Extended/Accepted</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Rejected">Rejected</option>
+          onChange={handleChange}
 
+        </select>
             </form>
+
+            
             <button onClick={removeJob} id="delete">DELETE</button>
         </div>
     )
