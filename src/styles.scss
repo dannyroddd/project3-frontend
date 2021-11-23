@@ -1,15 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700;1,900&display=swap');
+
+
+$primarycolor: rgb(97, 55, 0);
+$secondarycolor: rgb(150, 121, 83);
+$salmoncolor: salmon;
+$font: 'Poppins', sans-serif;
+
 
 body{
     background-image: url("./images/officebackground.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    font-family: $font;
 }
+
+h1 > .logo {
+    width: 30%;
+    margin-top: 20px;
+}
+
 nav{
-    display: flex;
-    justify-content: space-around;
-    border: 2px solid gray;
-    padding: 4px;
+    background-color:white;
+    margin: 0 auto;
+    text-align: center;
+    width: 60%;
+}
+
+button{
+    width: 180px;
+    margin: 30px auto;
+    position: relative;
+    box-shadow: 0 0 20px 8px #ff61241f;
+}
+
+.toggle-btn{
+    padding: 10px 30px;
+    margin: 20px 5px;
+    cursor: pointer;
+    background: white;
+    border: 1px solid $salmoncolor;
+    outline: none;
+    position: relative;
+    background: transparent;
+    box-shadow: inset 0 0 0 0 $salmoncolor;
+    -webkit-transition: ease-out 0.4s;
+    -moz-transition: ease-out 0.4s;
+    transition: ease-out 0.4s;
+
+}
+
+.toggle-btn:hover {
+    box-shadow: inset 400px 0 0 0 $salmoncolor;
+    color: white;
 }
 
 .App > a > h1{
@@ -22,16 +65,63 @@ nav{
     color: black;
 }
 
-input[type="text"], input[type="password"], input[type="submit"]{
-    padding: 5px;
-    margin: 8px;
-    background-color: salmon;
-    color: white;
-    border: none;
+form{
+    background-color:white;
+    width: 60%;
+    color:black;
+    height: 230px;
+    margin: 0 auto;
+
+    input[type="text"], input[type="password"]{
+        width: 70%;
+        padding: 10px;
+        margin: 8px;
+        background-color: white;
+        color:black;
+        border: none;
+        box-shadow: 0 0 20px 8px #ff61241f;
+        margin-bottom: 20px;
+    }
+    input[type="submit"] {
+        background-color: $salmoncolor;
+        border:0;
+        color: white;
+        padding: 10px;
+        width: 200px;
+        margin-top: 20px;
+        transition: 0.2s all;
+    }
+    input[type="submit"]:active {
+        transform: scale(0.95);
+    }
+    input:focus {
+        outline:0;      
+    }
 }
 
-h1 > .logo {
-    width: 40%;
-    margin-top: 50px;
+.home {
+    margin-top:100px;
+    h1, p {color: white;}
 }
 
+
+.login{
+    left: 500px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    
+    h1 > .logo {
+        width: 50%;
+        margin-top: 20px;
+    }    
+
+    nav{
+        width:100%;
+    }
+
+    form{
+        width: 100%;
+    }
+  }

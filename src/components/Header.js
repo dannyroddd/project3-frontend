@@ -7,14 +7,14 @@ const Header =(props) =>{
 
     const {gState, setGState} = useContext(GlobalCtx) 
 
-    const logout =(  <Link to="/Login"><h2 onClick={()=>{
+    const logout =(  <Link to="/Login"><button className="toggle-btn" onClick={()=>{
         window.localStorage.removeItem("token")
         setGState({...gState, token: null})
-    }}>Logout</h2></Link>)
+    }}>Logout</button></Link>)
 
     return (<nav>
-        <Link to="/signup"><h2>Signup</h2></Link>
-        <Link to="/login"><h2>Login</h2></Link>
+        <Link to="/signup"><button className="toggle-btn">Signup</button></Link>
+        <Link to="/login"><button className="toggle-btn">Login</button></Link>
         {gState.token ? logout : null }
     </nav>)
 }
