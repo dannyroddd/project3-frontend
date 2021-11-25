@@ -33,7 +33,7 @@ function Index(props) {
 
   // loaded function
   const loaded = () => {
-    return props.jobs.map((job) => (
+    return ( <div>{props.jobs ? props.jobs.map((job) => (
       <div key={job._id} className="job">
         <Link to={`/job/${job._id}`}><h1>{job.title}</h1></Link>
         <h3>{job.company}</h3>
@@ -43,11 +43,13 @@ function Index(props) {
         <a href={job.url}>{job.url}</a>
 
       </div>
-    ));
+    )) : null}
+    </div>
+    )
   };
 
   const loading = () => {
-    return <h1>Loading...</h1>;
+    return <h1>Loading...</h1>
   };
   return (
     <section>
@@ -62,7 +64,7 @@ function Index(props) {
         <input
           type="text"
           value={newForm.url}
-          name="URL"
+          name="url"
           placeholder="URL"
           onChange={handleChange}
         />
@@ -100,7 +102,7 @@ function Index(props) {
           <option value="Offer Extended/Accepted">Offer Extended/Accepted</option>
           <option value="Accepted">Accepted</option>
           <option value="Rejected">Rejected</option> */}
-          onChange={handleChange}
+          {/* onChange={handleChange} */}
         </select>
 
         <input type="submit" value="Create Job" />
