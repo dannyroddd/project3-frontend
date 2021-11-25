@@ -92,7 +92,7 @@ const deleteJob = async (id) =>{
     }
 
 console.log({jobs})
-console.log(jobs.props)
+// 
 
 
 return (
@@ -103,7 +103,7 @@ return (
                 <Index jobs={jobs} createJob={createJob}/>
             </Route>
             <Route exact path="/job/:id" 
-            render={(rp) => (
+            render={(rp) => 
                 <Show 
                 {...rp}
                 jobs={jobs}
@@ -112,7 +112,7 @@ return (
                 />
 
                 
-            )}
+            }
             />
                 
             
