@@ -1,7 +1,15 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react"
+// import { GlobalCtx } from "../App"
+// import { useContext } from "react"
 
 function Show(props) {
+
+
+    console.log("hello")
+    console.log(props)
     const id = props.match.params.id
+    // const jobs = props.jobs
+  
     const job = props.jobs.find((singleJob) => {
         return singleJob._id === id
     })
@@ -52,7 +60,7 @@ function Show(props) {
                  <option value="Offer Extended/Accepted">Offer Extended/Accepted</option>
                 <option value="Accepted">Accepted</option>
                 <option value="Rejected">Rejected</option>
-          onChange={handleChange}
+          
 
         </select>
             </form>
