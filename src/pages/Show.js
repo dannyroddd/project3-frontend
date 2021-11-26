@@ -11,11 +11,6 @@ function Show(props) {
     const id = props.match.params.id
     const [editForm, setEditForm] = useState({})
     // const jobs = props.jobs
-
-    console.log(props)
-    const id = props.match.params.id
-    const [editForm, setEditForm] = useState({})
-    // const jobs = props.jobs
     if (!gState.jobs){
         return <h1> NO JOBS</h1>
     }
@@ -24,10 +19,10 @@ function Show(props) {
         return singleJob._id === id
     })
     console.log(job)
-    
+
 
     // state for form
-    
+
 
     const handleChange = (event) => {
         setEditForm({...editForm, [event.target.name]: event.target.value})
@@ -43,6 +38,7 @@ function Show(props) {
         props.deleteJob(job._id)
         props.history.push("/")
     }
+
     return (
         <div>
             <h1>{job.title}</h1>
@@ -62,7 +58,7 @@ function Show(props) {
                 {/* <input type="text" name="status" placeholder="status" value={editForm.status} onChange={handleChange} />
                 <input type="submit" value="Update Job" /> */}
                 <select id = "status-select" value={editForm.status} name="status"
-        //   placeholder="Status" 
+        //   placeholder="Status"
         >
                 <option value="">--Please choose an option--</option>
                 <option value="applied">Applied</option>
@@ -71,12 +67,12 @@ function Show(props) {
                  <option value="Offer Extended/Accepted">Offer Extended/Accepted</option>
                 <option value="Accepted">Accepted</option>
                 <option value="Rejected">Rejected</option>
-          
+
 
         </select>
             </form>
 
-            
+
             <button onClick={removeJob} id="delete">DELETE</button>
         </div>
     )
