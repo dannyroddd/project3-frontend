@@ -21,10 +21,8 @@ h1 > .logo {
 }
 
 nav{
-    background-color:white;
     margin: 0 auto;
     text-align: center;
-    width: 60%;
 }
 
 button{
@@ -36,10 +34,10 @@ button{
 
 .toggle-btn{
     padding: 10px 30px;
-    margin: 20px 5px;
+    margin: 0px 10px;
     cursor: pointer;
     background: white;
-    border: 1px solid $salmoncolor;
+    border: 3px solid $salmoncolor;
     outline: none;
     position: relative;
     background: transparent;
@@ -69,7 +67,7 @@ form{
     background-color:white;
     width: 60%;
     color:black;
-    height: 230px;
+    height: 330px;
     margin: 0 auto;
 
     input[type="text"], input[type="password"]{
@@ -96,6 +94,9 @@ form{
     }
     input:focus {
         outline:0;      
+    }
+    h2{
+        padding-top: 30px;
     }
 }
 

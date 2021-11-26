@@ -43,8 +43,9 @@ const Signup =(props) =>{
     return (
         <div>
             <form id="signup" onSubmit={handleSubmit}>
+                <h2>Sign up</h2>
                 <input type="text" name="username" placeholder="Enter Username" value={form.username} onChange={handleChange}/>
-                <input type="password" name="password" value={form.password} placeholder="Enter Password" onChange={handleChange}/><br/>
+                <input type="password" name="password" value={form.password} placeholder="Enter Password" onChange={handleChange}/>
                 <input type="submit" value="Signup"/>
             </form>
         </div>
@@ -52,3 +53,6 @@ const Signup =(props) =>{
 }
 
 export default Signup 
+
+
+
