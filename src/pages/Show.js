@@ -9,8 +9,8 @@ function Show(props) {
     console.log(props)
     const id = props.match.params.id
     // const jobs = props.jobs
-  
-    const job = props.jobs.find((singleJob) => {
+
+    const job =  props.jobs.find((singleJob) => {
         return singleJob._id === id
     })
 
@@ -31,7 +31,6 @@ function Show(props) {
         props.deleteJob(job._id)
         props.history.push("/")
     }
-
     return (
         <div>
             <h1>{job.title}</h1>
