@@ -7,7 +7,7 @@ import Show from "../pages/Show"
 
 const Main = (props) => {
 
-const { gState, setGstate } = useContext(GlobalCtx)
+const { gState, setGState } = useContext(GlobalCtx)
 const { url, token} = gState
 
 const [jobs, setJobs] = useState(null)
@@ -27,6 +27,7 @@ const getJobs = async ()=>{
     const data = await response.json()
     console.log(data)
     setJobs(data)
+    setGState({...gState, jobs: data})
 }
 
 
@@ -99,20 +100,21 @@ return (
 
 <main>
         <Switch>
+            
             <Route exact path="/">
                 <Index jobs={jobs} createJob={createJob}/>
             </Route>
-            <Route exact path="/job/:id" 
-            render={(rp) => 
+            <Route  path="/job/:id" 
+            render={(rp) => ( jobs ?
                 <Show 
                 {...rp}
                 jobs={jobs}
                 updateJob={updateJob}
                 deleteJob={deleteJob}
                 />
-
+                : null
                 
-            }
+            )}
             />
                 
             

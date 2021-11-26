@@ -34,14 +34,15 @@ function App() {
     <div className="App">
       <Link to="/"><h1><img className="logo" src={logo} alt=" "></img></h1></Link>
       <Header />
-      <main>
+
+      {gState.token ? <Main/> : <Home />}
         <Switch>
-          <Route exact path="/" render={(rp) => gState.token ? <Main/> : <Home />}/>
+          {/* <Route exact path="/" render={(rp) => gState.token ? <Main/> : <Home />}/> */}
           <Route path="/signup" render={(rp) => <Signup {...rp}/>}/>
           <Route path="/login" render={(rp) => <Login {...rp}/>}/>
-          <Route path="/" render={(rp) => <Show {...rp}/>}/>
+          {/* <Route path="/job/:id" render={(rp) => <Show {...rp}/>}/> */}
         </Switch>
-      </main>
+     
     </div>
      </GlobalCtx.Provider>
   );
