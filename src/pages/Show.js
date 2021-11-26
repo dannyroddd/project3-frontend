@@ -1,13 +1,28 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react"
+import { GlobalCtx } from "../App"
+import { useContext } from "react"
 
 function Show(props) {
+
+    const { gState, setGState } = useContext(GlobalCtx)
+
+    console.log("hello")
+    console.log(props)
     const id = props.match.params.id
-    const job = props.jobs.find((singleJob) => {
+    const [editForm, setEditForm] = useState({})
+    // const jobs = props.jobs
+    if (!gState.jobs){
+        return <h1> NO JOBS</h1>
+    }
+    const job = gState.jobs.find((singleJob) => {
+        console.log(singleJob._id, id)
         return singleJob._id === id
     })
+    console.log(job)
+    
 
     // state for form
-    const [editForm, setEditForm] = useState(job)
+    
 
     const handleChange = (event) => {
         setEditForm({...editForm, [event.target.name]: event.target.value})
@@ -52,7 +67,7 @@ function Show(props) {
                  <option value="Offer Extended/Accepted">Offer Extended/Accepted</option>
                 <option value="Accepted">Accepted</option>
                 <option value="Rejected">Rejected</option>
-          onChange={handleChange}
+          
 
         </select>
             </form>
