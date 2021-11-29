@@ -58,6 +58,25 @@ const createJob =  (oneJob) =>{
 //    getJobs()
 }
 
+const createWishlist =  (oneJob) =>{
+  
+    console.log(oneJob)
+      fetch(url + "/job/", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "bearer " + token
+        },
+        body: JSON.stringify(oneJob),
+    })
+    .then(response => response.json())
+        .then(data =>  {
+            getJobs()
+        })
+    
+//    getJobs()
+}
+
 const updateJob = async (oneJob, id) =>{
   
     await fetch(url + id, {
@@ -102,7 +121,7 @@ return (
         <Switch>
             
             <Route exact path="/">
-                <Index jobs={jobs} createJob={createJob}/>
+                <Index jobs={jobs} createJob={createJob} createWishlist={createWishlist}/>
             </Route>
             <Route  path="/job/:id" 
             render={(rp) => ( jobs ?

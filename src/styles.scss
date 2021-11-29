@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700;1,900&display=swap');
 
 
-$primarycolor: rgb(97, 55, 0);
-$secondarycolor: rgb(150, 121, 83);
 $salmoncolor: salmon;
 $font: 'Poppins', sans-serif;
 
@@ -21,10 +19,8 @@ h1 > .logo {
 }
 
 nav{
-    background-color:white;
     margin: 0 auto;
     text-align: center;
-    width: 60%;
 }
 
 button{
@@ -36,10 +32,10 @@ button{
 
 .toggle-btn{
     padding: 10px 30px;
-    margin: 20px 5px;
+    margin: 0px 10px;
     cursor: pointer;
     background: white;
-    border: 1px solid $salmoncolor;
+    border: 3px solid $salmoncolor;
     outline: none;
     position: relative;
     background: transparent;
@@ -69,13 +65,14 @@ form{
     background-color:white;
     width: 60%;
     color:black;
-    height: 230px;
-    margin: 0 auto;
+    height: 400px;
+    margin: 40px auto;
+    padding: 20px;
 
     input[type="text"], input[type="password"]{
-        width: 70%;
-        padding: 10px;
-        margin: 8px;
+        width: 65%;
+        padding: 12px;
+        margin-top: 5px;
         background-color: white;
         color:black;
         border: none;
@@ -97,16 +94,113 @@ form{
     input:focus {
         outline:0;      
     }
+    h2{
+        padding-top: 20px;
+    }
 }
 
 .home {
-    margin-top:100px;
-    h1, p {color: white;}
+    h2, p {color: rgb(44, 44, 44)}
+    h2{
+        margin-top: 50px;
+    }
+    p{
+        font-size: .8em;
+        margin-top: -10px;
+    }
 }
 
 
 .login{
     left: 500px;
+}
+
+.errormessage{
+    color: red;
+    text-align: left;
+    font-size: .7em;
+    margin-top: -10px;
+    padding: 0 0 0px 100px;
+}
+
+// Index page
+.createform{
+    background-color:white;
+    color:black;
+    height: 500px;
+    padding: 20px;
+    float: left;
+    width: 26.2%;
+
+    input[type="text"], input[type="password"]{
+        padding: 12px;
+        margin-top: 5px;
+        background-color: white;
+        color:black;
+        border: none;
+        box-shadow: 0 0 20px 8px #ff61241f;
+        margin-bottom: 20px;
+    }
+    input[type="submit"] {
+        background-color: $salmoncolor;
+        border:0;
+        color: white;
+        padding: 10px;
+        width: 200px;
+        margin-top: 20px;
+        transition: 0.2s all;
+    }
+    input[type="submit"]:active {
+        transform: scale(0.95);
+    }
+    input:focus {
+        outline:0;      
+    }
+    h2{
+        padding-top: 20px;
+    }
+}
+
+.applied{
+    background-color:$salmoncolor;
+    color:white;
+    height: 500px;
+    padding: 20px;
+    float: left;
+    width: 32%;
+    margin-top: 40px;
+
+}
+
+.job{
+    h4{
+    color: white;
+    text-align: left;
+    }
+    a { text-decoration: none; }
+    a:hover { 
+        text-decoration: underline;
+        text-decoration-color: white;
+
+    }
+}
+
+hr{
+    height:1px;
+    border-width:0;
+    color:white;
+    background-color:white;
+}
+
+.wishlist{
+    background-color:#882b2b;
+    color:white;
+    height: 500px;
+    padding: 20px;
+    float: left;
+    width: 32%;
+    margin-top: 40px;
+
 }
 
 
@@ -123,5 +217,18 @@ form{
 
     form{
         width: 100%;
+        input, h2{
+            margin-left: -40px;
+        }
+    }
+
+    .errormessage{
+        padding: 0 0 0px 60px;
+    }
+}
+
+  @media only screen and (min-width: 1200px) {
+    .errormessage{
+        padding: 0 0 0px 135px;
     }
   }

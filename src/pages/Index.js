@@ -1,7 +1,15 @@
-import { useState } from "react";
+// import React from "react"
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom"
 
 function Index(props) {
+
+  // const state = {
+  //   button: 1
+  // };
+
+  
+
   // state to hold formData
   const [newForm, setNewForm] = useState({
     title: "",
@@ -12,6 +20,7 @@ function Index(props) {
     status:"",
   });
 
+const formRef = useRef()
   // handleChange function for form
   const handleChange = (event) => {
     setNewForm({ ...newForm, [event.target.name]: event.target.value });
@@ -20,7 +29,25 @@ function Index(props) {
   // handle submit function for form
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.createJob(newForm);
+     const { value } = formRef.current.name
+
+    
+      props.createJob(newForm);
+    setNewForm({
+        title: "",
+        company: "",
+        url: "",
+        date:"",
+        location:"",
+        status:"",
+    })};
+
+    const handleSubmitWish = (event) => {
+    event.preventDefault();
+     const { value } = formRef.current.name;
+
+    
+      props.createWishlist(newForm);
     setNewForm({
         title: "",
         company: "",
@@ -29,22 +56,83 @@ function Index(props) {
         location:"",
         status:"",
     });
+     
+    // props.createWishlist(newForm);
+    // setNewForm({
+    //     title: "",
+    //     company: "",
+    //     url: "",
+    //     date:"",
+    //     location:"",
+    //     status:"",
+    // })};
+    
+  
+
+    // props.createJob(newForm);
+    // setNewForm({
+    //     title: "",
+    //     company: "",
+    //     url: "",
+    //     date:"",
+    //     location:"",
+    //     status:"",
+    // });
   };
+
+  // const handleSubmitWish = (event) => {
+  //   event.preventDefault();
+  //   props.createWishlist(newForm);
+  //   setNewForm({
+  //       title: "",
+  //       company: "",
+  //       url: "",
+  //       date:"",
+  //       location:"",
+  //       status:"",
+  //   });
+  // };
 
 
   // loaded function
-  const loaded = () => {
-    return ( <div>{props.jobs ? props.jobs.map((job) => (
+  const loaded = () => { 
+
+    
+
+
+    return ( 
+    <div>
+    <div className="applied">
+      <h2>Applied</h2>
+      <input type="text" placeholder="Search.." />
+      <hr />
+      {props.jobs ? props.jobs.map((job) => (
       <div key={job._id} className="job">
-        <Link to={`/job/${job._id}`}><h1>{job.title}</h1></Link>
+        <Link to={`/job/${job._id}`}><h4>{job.title}</h4></Link>
         <h3>{job.company}</h3>
         <h3>{job.date}</h3>
         <h3>{job.location}</h3>
         <h3>{job.status}</h3>
         <a href={job.url}>{job.url}</a>
-
-      </div>
+      </div>  
     )) : null}
+    </div>
+
+    <div className="wishlist">
+    <h2>Wishlist</h2>
+    <input type="text" placeholder="Search.." />
+    <hr />
+    {props.jobs ? props.jobs.map((job) => (
+    <div key={job._id} className="job">
+      <Link to={`/job/${job._id}`}><h4>{job.title}</h4></Link>
+      <h3>{job.company}</h3>
+      <h3>{job.date}</h3>
+      <h3>{job.location}</h3>
+      <h3>{job.status}</h3>
+      <a href={job.url}>{job.url}</a>
+    </div>  
+    )) : null}
+    </div>
     </div>
     )
   };
@@ -52,9 +140,10 @@ function Index(props) {
   const loading = () => {
     return <h1>Loading...</h1>
   };
+  
   return (
     <section>
-      <form onSubmit={handleSubmit}>
+      <form className="createform" ref={formRef} >
         <input
           type="text"
           value={newForm.title}
@@ -89,7 +178,7 @@ function Index(props) {
           name="location"
           placeholder="Location"
           onChange={handleChange}
-        />
+        /><br/>
         <select
         id = "status-select"
         value={newForm.status}
@@ -105,8 +194,9 @@ function Index(props) {
           <option value="Rejected">Rejected</option> */}
           {/* onChange={handleChange} */}
         </select>
-
-        <input type="submit" value="Create Job" />
+        <br/>
+        <input type="submit" onClick={handleSubmit} value="Create Job" />
+        <input type="submit"  onClick={handleSubmitWish} value="Add Wishlist Job" />
       </form>
       {props.jobs ? loaded() : loading()}
     </section>
