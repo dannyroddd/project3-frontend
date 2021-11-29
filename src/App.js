@@ -5,7 +5,6 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Main from "./components/Main"
-import Show from "./pages/Show"
 import { Route, Link, Switch } from 'react-router-dom';
 import './App.css';
 import logo from "./images/jobpuglogo.png" 
@@ -34,7 +33,6 @@ function App() {
     <div className="App">
       <Link to="/"><h1><img className="logo" src={logo} alt=" "></img></h1></Link>
       <Header />
-
       {gState.token ? <Main/> : <Home />}
         <Switch>
           {/* <Route exact path="/" render={(rp) => gState.token ? <Main/> : <Home />}/> */}

@@ -14,7 +14,7 @@ const Signup =(props) =>{
 
     const [form, setForm] = useState(blankForm)
     const [errors, setErrors] = useState({})
-    const [isSubmit, setIsSubmit] = useState(false)
+
 
     const handleChange = (event) => {
         setForm({...form, [event.target.name]: event.target.value})
@@ -22,10 +22,8 @@ const Signup =(props) =>{
 
     const handleSubmit = (event) => {
         event.preventDefault()   
-        // setErrors(validate(form))
-        const error = validate(form)
-        setIsSubmit(true)
 
+        const error = validate(form)
         if (error.username || error.password){
             console.error(error)
             setErrors(error)
@@ -69,9 +67,9 @@ const Signup =(props) =>{
             <form id="signup" onSubmit={handleSubmit}>
                 <h2>Sign up</h2>
                 <input type="text" name="username" placeholder="Enter Username" value={form.username} onChange={handleChange}/>
-                <p>{errors.username}</p>
+                <p className="errormessage">{errors.username}</p>
                 <input type="password" name="password" value={form.password} placeholder="Enter Password" onChange={handleChange}/>
-                <p>{errors.password}</p><br/>
+                <p className="errormessage">{errors.password}</p><br/>
                 <input type="submit" value="Signup"/>
             </form>
         </div>

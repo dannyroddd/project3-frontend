@@ -6,11 +6,10 @@ function Show(props) {
 
     const { gState, setGState } = useContext(GlobalCtx)
 
-    console.log("hello")
-    console.log(props)
     const id = props.match.params.id
+
     const [editForm, setEditForm] = useState({})
-    // const jobs = props.jobs
+
     if (!gState.jobs){
         return <h1> NO JOBS</h1>
     }
@@ -18,11 +17,14 @@ function Show(props) {
         console.log(singleJob._id, id)
         return singleJob._id === id
     })
-    console.log(job)
 
-
-    // state for form
-
+    // if (!gState.appliedJobs){
+    //     return <h1> NO JOBS</h1>
+    // }
+    // const appliedJob = gState.appliedJobs.find((singleJob) => {
+    //     console.log(singleJob._id, id)
+    //     return singleJob._id === id
+    // })
 
     const handleChange = (event) => {
         setEditForm({...editForm, [event.target.name]: event.target.value})
@@ -34,10 +36,21 @@ function Show(props) {
         props.history.push("/")
     }
 
+    // const handleAppliedSubmit = (event) => {
+    //     event.preventDefault()
+    //     props.updateAppliedJob(editForm, job._id)
+    //     props.history.push("/")
+    // }
+
     const removeJob = () => {
         props.deleteJob(job._id)
         props.history.push("/")
     }
+
+    // const removeAppliedJob = () => {
+    //     props.deleteAppliedJob(job._id)
+    //     props.history.push("/")
+    // }
 
     return (
         <div>
@@ -53,7 +66,7 @@ function Show(props) {
 
                 <input type="text" name="location" placeholder="location" value={editForm.location} onChange={handleChange} />
 
-                <input type="text" name="url" placeholder="url" value={editForm.url} onChange={handleChange} />
+                <input type="text" name="url" placeholder="url" value={editForm.url} onChange={handleChange} /><br />
 
                 {/* <input type="text" name="status" placeholder="status" value={editForm.status} onChange={handleChange} />
                 <input type="submit" value="Update Job" /> */}
@@ -64,15 +77,11 @@ function Show(props) {
                 <option value="applied">Applied</option>
                 <option value="In Process">In Process</option>
                 <option value="Offer Extended/Rejected">Offer Extended/Rejected</option>
-                 <option value="Offer Extended/Accepted">Offer Extended/Accepted</option>
+                <option value="Offer Extended/Accepted">Offer Extended/Accepted</option>
                 <option value="Accepted">Accepted</option>
                 <option value="Rejected">Rejected</option>
-
-
-        </select>
+            </select>
             </form>
-
-
             <button onClick={removeJob} id="delete">DELETE</button>
         </div>
     )

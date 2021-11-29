@@ -11,11 +11,12 @@ const { gState, setGState } = useContext(GlobalCtx)
 const { url, token} = gState
 
 const [jobs, setJobs] = useState(null)
+const [appliedJobs, setAppliedJobs] = useState(null)
 const [firstLoad, setFirstLoad] = useState(true)
 
-useEffect(()=>{
+// useEffect(()=>{
 
-})
+// })
 
 const getJobs = async ()=>{
     const response = await fetch(url + "/job", {
@@ -30,17 +31,30 @@ const getJobs = async ()=>{
     setGState({...gState, jobs: data})
 }
 
+const getAppliedJobs = async ()=>{
+    const response = await fetch(url + "/appliedjob", {
+        method: "get",
+        headers: {
+            Authorization: "bearer " + token
+        }
+    })
+    const applieddata = await response.json()
+    console.log(applieddata)
+    setAppliedJobs(applieddata)
+    setGState({...gState, appliedJobs: applieddata})
+}
+
 
 useEffect(()=>{
    if(firstLoad){ 
        getJobs()
+       getAppliedJobs()
        setFirstLoad(false)
    } 
     console.log(jobs)
  }, [firstLoad])
 
 const createJob =  (oneJob) =>{
-  
     console.log(oneJob)
       fetch(url + "/job/", {
         method: "post",
@@ -54,8 +68,22 @@ const createJob =  (oneJob) =>{
         .then(data =>  {
             getJobs()
         })
-    
-//    getJobs()
+}
+
+const createAppliedJob =  (oneJob) =>{
+    console.log(oneJob)
+      fetch(url + "/appliedjob/", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "bearer " + token
+        },
+        body: JSON.stringify(oneJob),
+    })
+    .then(response => response.json())
+        .then(applieddata =>  {
+            getAppliedJobs()
+        })
 }
 
 const updateJob = async (oneJob, id) =>{
@@ -75,9 +103,25 @@ const updateJob = async (oneJob, id) =>{
         })
 }
 
+// const updateAppliedJob = async (oneJob, id) =>{
+  
+//     await fetch(url + id, {
+//         method: "put",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Authorization": "bearer " + token
+//         },
+//         body: JSON.stringify(oneJob)
+//     })
+  
+//     .then(response => response.json())
+//         .then(data =>  {
+//             getAppliedJobs()
+//         })
+// }
+
 const deleteJob = async (id) =>{
-  
-  
+    
      await fetch(url + "/job/" + id, {
         method: "delete",
         headers: {
@@ -92,8 +136,21 @@ const deleteJob = async (id) =>{
         })
     }
 
-console.log({jobs})
-// 
+// const deleteAppliedJob = async (id) =>{
+
+//     await fetch(url + "/appliedjob/" + id, {
+//     method: "delete",
+//     headers: {
+        
+//         "Authorization": "bearer " + token
+//     },
+    
+// })
+// .then(response => response.json())
+//     .then(data =>  {
+//         getAppliedJobs()
+//     })
+// }
 
 
 return (
@@ -102,9 +159,9 @@ return (
         <Switch>
             
             <Route exact path="/">
-                <Index jobs={jobs} createJob={createJob}/>
+                <Index jobs={jobs} setJobs={setJobs} appliedJobs={appliedJobs} setAppliedJobs={setAppliedJobs} createJob={createJob} createAppliedJob={createAppliedJob}/>
             </Route>
-            <Route  path="/job/:id" 
+            <Route path="/job/:id" 
             render={(rp) => ( jobs ?
                 <Show 
                 {...rp}
@@ -112,12 +169,10 @@ return (
                 updateJob={updateJob}
                 deleteJob={deleteJob}
                 />
-                : null
-                
+                : null    
             )}
             />
-                
-            
+        
         </Switch>
     </main>
 

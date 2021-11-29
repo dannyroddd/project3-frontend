@@ -13,6 +13,7 @@ const Login =(props) =>{
     }
 
     const [form, setForm] = useState(blankForm)
+    const [errors, setErrors] = useState({})
 
     const handleChange = (event) => {
         setForm({...form, [event.target.name]: event.target.value})
@@ -21,6 +22,13 @@ const Login =(props) =>{
 
     const handleSubmit = (event) => {
         event.preventDefault()
+
+        const error = validate(form)
+        if (error.username || error.password){
+            console.error(error)
+            setErrors(error)
+            return 0
+        }
 
         const {username, password} = form
 
@@ -42,12 +50,25 @@ const Login =(props) =>{
         })
     }
 
+    const validate = (value) => {
+        let error = {}
+        if(!value.username.trim()) {
+            error.username = "Username is required"
+        }
+        if(!value.password) {
+            error.password = "Password is required"       
+        } 
+        return error
+    }
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
                 <h2>Log in</h2>
                 <input type="text" name="username" placeholder="Enter Username"value={form.username} onChange={handleChange}/>
+                <p className="errormessage">{errors.username}</p>
                 <input type="password" name="password" value={form.password} placeholder="Enter Password" onChange={handleChange}/><br/>
+                <p className="errormessage">{errors.password}</p><br/>
                 <input type="submit" value="Login"/>
             </form>
         </div>
