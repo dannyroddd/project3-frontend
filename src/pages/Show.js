@@ -18,6 +18,8 @@ function Show(props) {
         return singleJob._id === id
     })
 
+
+
     const handleChange = (event) => {
         setEditForm({...editForm, [event.target.name]: event.target.value})
     }
@@ -36,11 +38,20 @@ function Show(props) {
 
     return (
         <div>
-            <h1>{job.title}</h1>
-            <h1>{job.company}</h1>
-            <h1>{job.location}</h1>
-            <h1>{job.status}</h1>
-            <h3><a href={job.url}>{job.url}</a></h3>
+
+            <div className="showjob">
+            
+            <h1>{job.title} - {job.company}</h1>
+            <p>{job.location}</p>
+            <p><a href={job.url}>{job.url}</a></p>
+            <p>{job.status}</p>
+
+            {/* <h1>{job.title} - {job.company}</h1>
+            <p>{job.location}</p>
+            <p><a href={job.url}>{job.url}</a></p>
+            <p>Status: {job.status}</p> */}
+            </div>
+
             <form onSubmit={handleSubmit}>
                 <input type="text" name="title" placeholder="title" value={editForm.title} onChange={handleChange} />
 
@@ -51,7 +62,6 @@ function Show(props) {
                 <input type="text" name="url" placeholder="url" value={editForm.url} onChange={handleChange} /><br />
 
                 <input type="text" name="status" placeholder="status" value={editForm.status} onChange={handleChange} />
-                <input type="submit" value="Update Job" />
                 <select id = "status-select" value={editForm.status} name="status"
         //   placeholder="Status"
         >
@@ -62,9 +72,16 @@ function Show(props) {
                 <option value="Offer Extended/Accepted">Offer Extended/Accepted</option>
                 <option value="Accepted">Accepted</option>
                 <option value="Rejected">Rejected</option>
-            </select>
-            <button onClick={removeJob} id="delete">DELETE</button>
+            </select> 
+            <br></br>
+
+            <input type="submit" value="Update Job" />
+            <br></br>
+
             </form>
+            <button className="delete" onClick={removeJob} id="delete">Delete this Job</button>
+
+
         </div>
     )
 }
