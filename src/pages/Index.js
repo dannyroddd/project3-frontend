@@ -82,15 +82,15 @@ function Index(props) {
           <DragDropContext onDragEnd={onDragEnd}>
           <div className="list-container">
           <Droppable droppableId="wishlist">
-            {(provided) => (
-                <div className="wishlist" ref={provided.innerRef} {...provided.droppableProps}>
+            {(provided, snapshot) => (
+                <div className={`wishlist ${snapshot.isDraggingOver ? 'dragactive' : ""}`} ref={provided.innerRef} {...provided.droppableProps}>
                 <h2>Wishlist</h2>
                 {props.jobs ? props.jobs.map((job, index) => (
                   <Draggable key={job._id} draggableId={job._id} index={index}>
-                    {(provided)=>( 
+                    {(provided, snapshot)=>( 
                       <div ref={provided.innerRef}
                       {...provided.draggableProps}
-                      {...provided.dragHandleProps} className="job">
+                      {...provided.dragHandleProps} className={`job ${snapshot.isDragging ? 'drag' : ""}`}>
                         <Link to={`/job/${job._id}`}><h4>{job.title}</h4></Link>
                         {/* <h3>{job.company}</h3>
                         <h3>{job.date}</h3>
@@ -107,16 +107,16 @@ function Index(props) {
             }
          </Droppable>
          <Droppable droppableId="applied">
-            {(provided) =>(
-                <div className="applied" ref={provided.innerRef} {...provided.droppableProps}>
+            {(provided, snapshot) =>(
+                <div className={`applied ${snapshot.isDraggingOver ? 'dragcomplete' : ""}`} ref={provided.innerRef} {...provided.droppableProps}>
                 <h2>Applied</h2>
                 {props.appliedJobs ? props.appliedJobs.map((job, index) => (
                   <Draggable key={job._id} draggableId={job._id} index={index}>
-                    {(provided)=>(
+                    {(provided, snapshot)=>(
                       <div ref={provided.innerRef}
                       {...provided.draggableProps}
-                      {...provided.dragHandleProps} className="job">
-                          <Link to={`/job/${job._id}`}><h4>{job.title}</h4></Link>
+                      {...provided.dragHandleProps} className={`job ${snapshot.isDragging ? 'drag' : ""}`}>
+                          <Link to={`/appliedjob/${job._id}`}><h4>{job.title}</h4></Link>
                           {/* <h3>{job.company}</h3>
                           <h3>{job.date}</h3>
                           <h3>{job.location}</h3>
@@ -140,8 +140,6 @@ function Index(props) {
     return <h1>Loading...</h1>
   };
 
-
-  
   return (
     <section>
       <form className="createform">

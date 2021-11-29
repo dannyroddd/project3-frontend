@@ -4,6 +4,7 @@ import { useContext } from "react"
 import { Route, Switch } from "react-router-dom"
 import Index from "../pages/Index"
 import Show from "../pages/Show"
+import Applied from "../pages/Applied"
 
 const Main = (props) => {
 
@@ -103,22 +104,22 @@ const updateJob = async (oneJob, id) =>{
         })
 }
 
-// const updateAppliedJob = async (oneJob, id) =>{
+const updateAppliedJob = async (oneJob, id) =>{
   
-//     await fetch(url + id, {
-//         method: "put",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Authorization": "bearer " + token
-//         },
-//         body: JSON.stringify(oneJob)
-//     })
+    await fetch(url + id, {
+        method: "put",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "bearer " + token
+        },
+        body: JSON.stringify(oneJob)
+    })
   
-//     .then(response => response.json())
-//         .then(data =>  {
-//             getAppliedJobs()
-//         })
-// }
+    .then(response => response.json())
+        .then(data =>  {
+            getAppliedJobs()
+        })
+}
 
 const deleteJob = async (id) =>{
     
@@ -136,21 +137,21 @@ const deleteJob = async (id) =>{
         })
     }
 
-// const deleteAppliedJob = async (id) =>{
+const deleteAppliedJob = async (id) =>{
 
-//     await fetch(url + "/appliedjob/" + id, {
-//     method: "delete",
-//     headers: {
+    await fetch(url + "/appliedjob/" + id, {
+    method: "delete",
+    headers: {
         
-//         "Authorization": "bearer " + token
-//     },
+        "Authorization": "bearer " + token
+    },
     
-// })
-// .then(response => response.json())
-//     .then(data =>  {
-//         getAppliedJobs()
-//     })
-// }
+})
+.then(response => response.json())
+    .then(data =>  {
+        getAppliedJobs()
+    })
+}
 
 
 return (
@@ -168,6 +169,17 @@ return (
                 jobs={jobs}
                 updateJob={updateJob}
                 deleteJob={deleteJob}
+                />
+                : null    
+            )}
+            />
+            <Route path="/appliedjob/:id" 
+            render={(rp) => ( appliedJobs ?
+                <Applied 
+                {...rp}
+                appliedJobs={appliedJobs}
+                updateAppliedJob={updateAppliedJob}
+                deleteAppliedJob={deleteAppliedJob}
                 />
                 : null    
             )}

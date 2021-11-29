@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700;1,900&display=swap');
 
 
-$salmoncolor: salmon;
+$salmoncolor: #fa8072;
 $font: 'Poppins', sans-serif;
 
 
@@ -14,8 +14,7 @@ body{
 }
 
 h1 > .logo {
-    width: 30%;
-    margin-top: 20px;
+    width: 20%;
 }
 
 nav{
@@ -95,7 +94,7 @@ form{
         outline:0;      
     }
     h2{
-        padding-top: 20px;
+        margin-top: 20px;
     }
 }
 
@@ -127,7 +126,7 @@ form{
 .createform{
     background-color:white;
     color:black;
-    height: 520px;
+    height: 450px;
     padding: 20px;
     width: 90%;
 
@@ -157,6 +156,10 @@ form{
     }
     #applied{
         background-color: #acbdc9;
+        margin-left: 20px;
+    }
+    h2{
+        margin-top: -10px;
     }
 }
 
@@ -208,6 +211,14 @@ hr{
     height: 500px;
     padding: 20px;
     width: 40%;
+}
+
+.dragactive{
+    background-color: #fa513e;
+}
+
+.dragcomplete{
+    background-color: #58b2db;
 }
 
 
