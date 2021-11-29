@@ -8,7 +8,7 @@ import Main from "./components/Main"
 import { Route, Link, Switch } from 'react-router-dom';
 import './App.css';
 import logo from "./images/jobpuglogo.png" 
-
+//
 
 export const GlobalCtx = React.createContext(null)
 
