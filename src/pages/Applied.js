@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { GlobalCtx } from "../App"
 import { useContext } from "react"
 
-function Show(props) {
+function Applied(props) {
 
     const { gState, setGState } = useContext(GlobalCtx)
 
@@ -10,10 +10,10 @@ function Show(props) {
 
     const [editForm, setEditForm] = useState({})
 
-    if (!gState.jobs){
+    if (!gState.appliedJobs){
         return <h1> NO JOBS</h1>
     }
-    const job = gState.jobs.find((singleJob) => {
+    const appliedJob = gState.appliedJobs.find((singleJob) => {
         console.log(singleJob._id, id)
         return singleJob._id === id
     })
@@ -24,23 +24,22 @@ function Show(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        props.updateJob(editForm, job._id)
+        props.updateAppliedJob(editForm, appliedJob._id)
         props.history.push("/")
     }
 
     const removeJob = () => {
-        props.deleteJob(job._id)
+        props.deleteAppliedJob(appliedJob._id)
         props.history.push("/")
     }
 
-
     return (
         <div>
-            <h1>{job.title}</h1>
-            <h1>{job.company}</h1>
-            <h1>{job.location}</h1>
-            <h1>{job.status}</h1>
-            <h3><a href={job.url}>{job.url}</a></h3>
+            <h1>{appliedJob.title}</h1>
+            <h1>{appliedJob.company}</h1>
+            <h1>{appliedJob.location}</h1>
+            <h1>{appliedJob.status}</h1>
+            <h3><a href={appliedJob.url}>{appliedJob.url}</a></h3>
             <form onSubmit={handleSubmit}>
                 <input type="text" name="title" placeholder="title" value={editForm.title} onChange={handleChange} />
 
@@ -69,4 +68,4 @@ function Show(props) {
     )
 }
 
-export default Show;
+export default Applied;

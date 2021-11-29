@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700;1,900&display=swap');
 
 
-$salmoncolor: salmon;
+$salmoncolor: #fa8072;
 $font: 'Poppins', sans-serif;
 
 
@@ -14,8 +14,7 @@ body{
 }
 
 h1 > .logo {
-    width: 30%;
-    margin-top: 20px;
+    width: 20%;
 }
 
 nav{
@@ -95,7 +94,7 @@ form{
         outline:0;      
     }
     h2{
-        padding-top: 20px;
+        margin-top: 20px;
     }
 }
 
@@ -127,10 +126,9 @@ form{
 .createform{
     background-color:white;
     color:black;
-    height: 500px;
+    height: 450px;
     padding: 20px;
-    float: left;
-    width: 26.2%;
+    width: 90%;
 
     input[type="text"], input[type="password"]{
         padding: 12px;
@@ -156,26 +154,36 @@ form{
     input:focus {
         outline:0;      
     }
+    #applied{
+        background-color: #acbdc9;
+        margin-left: 20px;
+    }
     h2{
-        padding-top: 20px;
+        margin-top: -10px;
     }
 }
 
+.list-container{
+    display: flex ;
+    justify-content: space-around;
+}
+
 .applied{
-    background-color:$salmoncolor;
+    background-color:#acbdc9;
     color:white;
     height: 500px;
     padding: 20px;
-    float: left;
-    width: 32%;
-    margin-top: 40px;
+    width: 40%;
 
 }
 
 .job{
     h4{
-    color: white;
+    background-color: white;
+    color: black;
     text-align: left;
+    padding: 10px;
+    transition: 0.2s;
     }
     a { text-decoration: none; }
     a:hover { 
@@ -183,6 +191,11 @@ form{
         text-decoration-color: white;
 
     }
+}
+
+.job h4:hover{
+    transform: scale(1.03);
+
 }
 
 hr{
@@ -193,14 +206,19 @@ hr{
 }
 
 .wishlist{
-    background-color:#882b2b;
+    background-color:$salmoncolor;
     color:white;
     height: 500px;
     padding: 20px;
-    float: left;
-    width: 32%;
-    margin-top: 40px;
+    width: 40%;
+}
 
+.dragactive{
+    background-color: #fa513e;
+}
+
+.dragcomplete{
+    background-color: #58b2db;
 }
 
 
@@ -224,6 +242,15 @@ hr{
 
     .errormessage{
         padding: 0 0 0px 60px;
+    }
+    .list-container{
+        flex-direction: column;
+    }
+    .applied{
+        width: 100%;
+    }
+    .wishlist{
+        width: 100%;
     }
 }
 

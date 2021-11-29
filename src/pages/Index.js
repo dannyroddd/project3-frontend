@@ -1,14 +1,9 @@
 // import React from "react"
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom"
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"
 
 function Index(props) {
-
-  // const state = {
-  //   button: 1
-  // };
-
-  
 
   // state to hold formData
   const [newForm, setNewForm] = useState({
@@ -20,18 +15,16 @@ function Index(props) {
     status:"",
   });
 
-const formRef = useRef()
+
   // handleChange function for form
   const handleChange = (event) => {
     setNewForm({ ...newForm, [event.target.name]: event.target.value });
   };
 
   // handle submit function for form
-  const handleSubmit = (event) => {
-    event.preventDefault();
-     const { value } = formRef.current.name
 
-    
+  const handleWishlistSubmit = (event) => {
+    event.preventDefault();
       props.createJob(newForm);
     setNewForm({
         title: "",
@@ -40,14 +33,10 @@ const formRef = useRef()
         date:"",
         location:"",
         status:"",
-    })};
-
-    const handleSubmitWish = (event) => {
+  })};
+  const handleAppliedSubmit = (event) => {
     event.preventDefault();
-     const { value } = formRef.current.name;
-
-    
-      props.createWishlist(newForm);
+      props.createAppliedJob(newForm);
     setNewForm({
         title: "",
         company: "",
@@ -55,95 +44,106 @@ const formRef = useRef()
         date:"",
         location:"",
         status:"",
-    });
-     
-    // props.createWishlist(newForm);
-    // setNewForm({
-    //     title: "",
-    //     company: "",
-    //     url: "",
-    //     date:"",
-    //     location:"",
-    //     status:"",
-    // })};
-    
-  
-
-    // props.createJob(newForm);
-    // setNewForm({
-    //     title: "",
-    //     company: "",
-    //     url: "",
-    //     date:"",
-    //     location:"",
-    //     status:"",
-    // });
-  };
-
-  // const handleSubmitWish = (event) => {
-  //   event.preventDefault();
-  //   props.createWishlist(newForm);
-  //   setNewForm({
-  //       title: "",
-  //       company: "",
-  //       url: "",
-  //       date:"",
-  //       location:"",
-  //       status:"",
-  //   });
-  // };
-
+  })};
 
   // loaded function
   const loaded = () => { 
 
-    
-
-
-    return ( 
-    <div>
-    <div className="applied">
-      <h2>Applied</h2>
-      <input type="text" placeholder="Search.." />
-      <hr />
-      {props.jobs ? props.jobs.map((job) => (
-      <div key={job._id} className="job">
-        <Link to={`/job/${job._id}`}><h4>{job.title}</h4></Link>
-        <h3>{job.company}</h3>
-        <h3>{job.date}</h3>
-        <h3>{job.location}</h3>
-        <h3>{job.status}</h3>
-        <a href={job.url}>{job.url}</a>
-      </div>  
-    )) : null}
-    </div>
-
-    <div className="wishlist">
-    <h2>Wishlist</h2>
-    <input type="text" placeholder="Search.." />
-    <hr />
-    {props.jobs ? props.jobs.map((job) => (
-    <div key={job._id} className="job">
-      <Link to={`/job/${job._id}`}><h4>{job.title}</h4></Link>
-      <h3>{job.company}</h3>
-      <h3>{job.date}</h3>
-      <h3>{job.location}</h3>
-      <h3>{job.status}</h3>
-      <a href={job.url}>{job.url}</a>
-    </div>  
-    )) : null}
-    </div>
-    </div>
-    )
-  };
+      const onDragEnd = (result) => {
+        const {source, destination} = result;
+        console.log(result)
+        if(!destination) {
+          return;
+        }
+        if(destination.draggableId === source.draggableId && destination.index === source.index) {
+          return;
+        }
+        let add;
+        let wishlist = props.jobs
+        let applied = props.appliedJobs
+        //source logic
+        if(source.droppableId==="wishlist"){
+          add = wishlist[source.index]
+          wishlist.splice(source.index, 1)
+        } else {
+          add = applied[source.index]
+          applied.splice(source.index, 1)
+        }
+        // destination logic
+        if(destination.droppableId==="wishlist"){
+          wishlist.splice(destination.index, 0, add)
+        } else {
+          applied.splice(destination.index, 0, add)
+        }
+        props.setAppliedJobs(applied)
+        props.setJobs(wishlist)
+      }
+        return(
+          <DragDropContext onDragEnd={onDragEnd}>
+          <div className="list-container">
+          <Droppable droppableId="wishlist">
+            {(provided, snapshot) => (
+                <div className={`wishlist ${snapshot.isDraggingOver ? 'dragactive' : ""}`} ref={provided.innerRef} {...provided.droppableProps}>
+                <h2>Wishlist</h2>
+                {props.jobs ? props.jobs.map((job, index) => (
+                  <Draggable key={job._id} draggableId={job._id} index={index}>
+                    {(provided, snapshot)=>( 
+                      <div ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps} className={`job ${snapshot.isDragging ? 'drag' : ""}`}>
+                        <Link to={`/job/${job._id}`}><h4>{job.title}</h4></Link>
+                        {/* <h3>{job.company}</h3>
+                        <h3>{job.date}</h3>
+                        <h3>{job.location}</h3>
+                        <h3>{job.status}</h3>
+                        <a href={job.url}>{job.url}</a> */}
+                      </div>
+                    )}
+                  </Draggable> 
+                )) : null}
+                {provided.placeholder}
+                </div>
+            )
+            }
+         </Droppable>
+         <Droppable droppableId="applied">
+            {(provided, snapshot) =>(
+                <div className={`applied ${snapshot.isDraggingOver ? 'dragcomplete' : ""}`} ref={provided.innerRef} {...provided.droppableProps}>
+                <h2>Applied</h2>
+                {props.appliedJobs ? props.appliedJobs.map((job, index) => (
+                  <Draggable key={job._id} draggableId={job._id} index={index}>
+                    {(provided, snapshot)=>(
+                      <div ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps} className={`job ${snapshot.isDragging ? 'drag' : ""}`}>
+                          <Link to={`/appliedjob/${job._id}`}><h4>{job.title}</h4></Link>
+                          {/* <h3>{job.company}</h3>
+                          <h3>{job.date}</h3>
+                          <h3>{job.location}</h3>
+                          <h3>{job.status}</h3>
+                          <a href={job.url}>{job.url}</a> */}
+                    </div>
+                    )}
+                  </Draggable> 
+                )) : null}
+                {provided.placeholder}
+                </div>
+            )
+            }
+        </Droppable>
+          </div>
+        </DragDropContext>
+        )
+      }
 
   const loading = () => {
     return <h1>Loading...</h1>
   };
-  
+
   return (
     <section>
-      <form className="createform" ref={formRef} >
+      <form className="createform">
+        <h2>Add a New Job</h2>
         <input
           type="text"
           value={newForm.title}
@@ -195,8 +195,8 @@ const formRef = useRef()
           {/* onChange={handleChange} */}
         </select>
         <br/>
-        <input type="submit" onClick={handleSubmit} value="Create Job" />
-        <input type="submit"  onClick={handleSubmitWish} value="Add Wishlist Job" />
+        <input type="submit" value="Add to Wishlist" onClick={handleWishlistSubmit}/>
+        <input type="submit" id="applied" value="Add to Applied" onClick={handleAppliedSubmit}/>
       </form>
       {props.jobs ? loaded() : loading()}
     </section>
