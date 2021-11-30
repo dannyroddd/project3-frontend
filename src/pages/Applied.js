@@ -36,10 +36,10 @@ function Applied(props) {
     return (
         <div>
             <h1>{appliedJob.title}</h1>
-            <h1>{appliedJob.company}</h1>
-            <h1>{appliedJob.location}</h1>
-            <h1>{appliedJob.status}</h1>
-            <h3><a href={appliedJob.url}>{appliedJob.url}</a></h3>
+            <h3>{appliedJob.company}</h3>
+            <h3>{appliedJob.location}</h3>
+            <h3>Status: {appliedJob.status}</h3>
+            <h4><a href={appliedJob.url}>{appliedJob.url}</a></h4>
             <form onSubmit={handleSubmit}>
                 <input type="text" name="title" placeholder="title" value={editForm.title} onChange={handleChange} />
 
@@ -49,22 +49,21 @@ function Applied(props) {
 
                 <input type="text" name="url" placeholder="url" value={editForm.url} onChange={handleChange} /><br />
 
-                <input type="text" name="status" placeholder="status" value={editForm.status} onChange={handleChange} />
-                <input type="submit" value="Update Job" />
-                <select id = "status-select" value={editForm.status} name="status"
-        //   placeholder="Status"
-        >
-                <option value="">--Please choose an option--</option>
+                <label>Select Status:   </label>
+                <select name="status" value={editForm.status} onChange={handleChange}>
                 <option value="applied">Applied</option>
                 <option value="In Process">In Process</option>
                 <option value="Offer Extended/Rejected">Offer Extended/Rejected</option>
                 <option value="Offer Extended/Accepted">Offer Extended/Accepted</option>
                 <option value="Accepted">Accepted</option>
                 <option value="Rejected">Rejected</option>
-            </select>
-            <button onClick={removeJob} id="delete">DELETE</button>
-            </form>
-        </div>
+                    </select> 
+                <br></br>
+                <input class="showbutton" type="submit" value="Update Job" />
+                <br></br>
+                <button class="showbutton" onClick={removeJob} id="delete">Delete</button>
+                    </form>
+                        </div>
     )
 }
 
