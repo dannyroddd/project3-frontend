@@ -14,7 +14,7 @@ function Applied(props) {
         return <h1> NO JOBS</h1>
     }
     const appliedJob = gState.appliedJobs.find((singleJob) => {
-        console.log(singleJob._id, id)
+        console.log(singleJob._id)
         return singleJob._id === id
     })
 

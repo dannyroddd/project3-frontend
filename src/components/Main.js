@@ -89,7 +89,7 @@ const createAppliedJob =  (oneJob) =>{
 
 const updateJob = async (oneJob, id) =>{
   
-    await fetch(url + id, {
+    await fetch(url + `/job/${id}`, {
         method: "put",
         headers: {
             "Content-Type": "application/json",
@@ -106,7 +106,7 @@ const updateJob = async (oneJob, id) =>{
 
 const updateAppliedJob = async (oneJob, id) =>{
   
-    await fetch(url + id, {
+    await fetch(url + `/appliedjob/${id}`, {
         method: "put",
         headers: {
             "Content-Type": "application/json",
