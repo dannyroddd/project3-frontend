@@ -15,6 +15,9 @@ function Index(props) {
     status:"",
   });
 
+  const [query, setQuery] = useState("");
+  const [AppliedQuery, AppliedSetQuery] = useState("");
+
 
   // handleChange function for form
   const handleChange = (event) => {
@@ -78,26 +81,62 @@ function Index(props) {
         props.setAppliedJobs(applied)
         props.setJobs(wishlist)
       }
+
+  //  *******SEARCH BAR*****************************
+        let wishlist = props.jobs
+
+  const getFilteredItems = (query, wishlist) => {
+    if (!query) {
+      return wishlist;
+    }
+    return wishlist.filter((job) => job.title.includes(query));
+  }
+
+  const filteredItems = getFilteredItems(query, wishlist);
+
+  // *******SEARCH BAR*****************************
+
+  let applied = props.appliedJobs
+
+    const getFilteredItemsApplied = (AppliedQuery, applied) => {
+      if (!AppliedQuery) {
+        return applied;
+      }
+      return applied.filter((job) => job.title.includes(AppliedQuery));
+    }
+  
+    const FilteredItemsApplied = getFilteredItemsApplied(AppliedQuery, applied);
+  
+    // *******SEARCH BAR*****************************
+
         return(
+          
           <DragDropContext onDragEnd={onDragEnd}>
           <div className="list-container">
+          
           <Droppable droppableId="wishlist">
             {(provided, snapshot) => (
                 <div className={`wishlist ${snapshot.isDraggingOver ? 'dragactive' : ""}`} ref={provided.innerRef} {...provided.droppableProps}>
                 <h2>Wishlist</h2>
-                {props.jobs ? props.jobs.map((job, index) => (
+
+                
+                {/* *******SEARCH BAR***************************** */}
+
+                {/* <div className="App"> */}
+                <label>Search  </label>
+                <input type="text" onChange={(e) => setQuery(e.target.value)} />
+
+                {/* *******SEARCH BAR***************************** */}
+
+
+                {filteredItems ? filteredItems.map((job, index) => (
                   <Draggable key={job._id} draggableId={job._id} index={index}>
                     {(provided, snapshot)=>( 
                       <div ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps} className={`job ${snapshot.isDragging ? 'drag' : ""}`}>
                         <Link to={`/job/${job._id}`}><h4>{job.title}</h4></Link>
-                        {/* <h3>{job.company}</h3>
-                        <h3>{job.date}</h3>
-                        <h3>{job.location}</h3>
-                        <h3>{job.status}</h3>
-                        <a href={job.url}>{job.url}</a> */}
-                      </div>
+                        </div>
                     )}
                   </Draggable> 
                 )) : null}
@@ -105,24 +144,31 @@ function Index(props) {
                 </div>
             )
             }
-         </Droppable>
+         </Droppable>          
+
+
+
          <Droppable droppableId="applied">
             {(provided, snapshot) =>(
                 <div className={`applied ${snapshot.isDraggingOver ? 'dragcomplete' : ""}`} ref={provided.innerRef} {...provided.droppableProps}>
                 <h2>Applied</h2>
-                {props.appliedJobs ? props.appliedJobs.map((job, index) => (
+                {/* *******SEARCH BAR***************************** */}
+
+                {/* <div className="App"> */}
+                <label>Search  </label>
+                <input type="text" onChange={(e) => AppliedSetQuery(e.target.value)} />
+
+                {/* *******SEARCH BAR***************************** */}
+
+
+                {FilteredItemsApplied ? FilteredItemsApplied.map((job, index) => (
                   <Draggable key={job._id} draggableId={job._id} index={index}>
-                    {(provided, snapshot)=>(
+                    {(provided, snapshot)=>( 
                       <div ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps} className={`job ${snapshot.isDragging ? 'drag' : ""}`}>
-                          <Link to={`/appliedjob/${job._id}`}><h4>{job.title}</h4></Link>
-                          {/* <h3>{job.company}</h3>
-                          <h3>{job.date}</h3>
-                          <h3>{job.location}</h3>
-                          <h3>{job.status}</h3>
-                          <a href={job.url}>{job.url}</a> */}
-                    </div>
+                        <Link to={`/job/${job._id}`}><h4>{job.title}</h4></Link>
+                        </div>
                     )}
                   </Draggable> 
                 )) : null}
@@ -130,11 +176,12 @@ function Index(props) {
                 </div>
             )
             }
-        </Droppable>
+         </Droppable> 
           </div>
         </DragDropContext>
         )
       }
+
 
   const loading = () => {
     return <h1>Loading...</h1>
