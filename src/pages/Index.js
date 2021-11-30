@@ -179,22 +179,19 @@ function Index(props) {
           placeholder="Location"
           onChange={handleChange}
         /><br/>
-        <select
-        id = "status-select"
-        value={newForm.status}
-        name="status"
-        //   placeholder="Status"
-          >
-          <option value="">--Please choose an option--</option>
-          <option value="applied">Applied</option>
-          <option value="In Process">In Process</option>
-          {/* <option value="Offer Extended/Rejected">Offer Extended/Rejected</option>
-          <option value="Offer Extended/Accepted">Offer Extended/Accepted</option>
-          <option value="Accepted">Accepted</option>
-          <option value="Rejected">Rejected</option> */}
-          {/* onChange={handleChange} */}
-        </select>
-        <br/>
+
+
+<label>Select Status:    </label>
+        <select name="status" value={newForm.status} onChange={handleChange}>
+        <option value="applied">Applied</option>
+        <option value="In Process">In Process</option>
+        <option value="Offer Extended/Rejected">Offer Extended/Rejected</option>
+        <option value="Offer Extended/Accepted">Offer Extended/Accepted</option>
+        <option value="Accepted">Accepted</option>
+        <option value="Rejected">Rejected</option>
+        </select> 
+        <br></br>
+
         <input type="submit" value="Add to Wishlist" onClick={handleWishlistSubmit}/>
         <input type="submit" id="applied" value="Add to Applied" onClick={handleAppliedSubmit}/>
       </form>
