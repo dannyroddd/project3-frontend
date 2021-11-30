@@ -16,7 +16,7 @@ export const GlobalCtx = React.createContext(null)
 
 function App() {
 
-  const [gState, setGState] = useState({url: "http://localhost:3000", token: null})
+  const [gState, setGState] = useState({url: "https://jobpug.herokuapp.com/", token: null})
 
   useEffect(()=>{
     const token = JSON.parse(window.localStorage.getItem("token"))
