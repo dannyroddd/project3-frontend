@@ -167,7 +167,7 @@ function Index(props) {
                       <div ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps} className={`job ${snapshot.isDragging ? 'drag' : ""}`}>
-                        <Link to={`/job/${job._id}`}><h4>{job.title}</h4></Link>
+                        <Link to={`/appliedjob/${job._id}`}><h4>{job.title}</h4></Link>
                         </div>
                     )}
                   </Draggable> 
